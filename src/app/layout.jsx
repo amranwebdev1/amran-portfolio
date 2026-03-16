@@ -45,8 +45,8 @@ export const metadata = {
   openGraph: {
     title: 'Amran Hossen | Full-Stack Developer',
     description: 'Explore my projects and skills in modern web development.',
-    url: 'https://amran.dev', // আপনার ডোমেইন
-    siteName: 'Amran.dev',
+    url: 'https://amran-portfolio.vercel.app/', // আপনার ডোমেইন
+    siteName: 'amran-portfolo',
     images: [
       {
         url: '/icon2.png', // একটি সুন্দর ইমেজ যা ফেসবুকে শেয়ার করলে দেখাবে
@@ -64,25 +64,42 @@ export const metadata = {
     creator: '@your_twitter_handle', // আপনার টুইটার ইউজারনেম
     images: ['/icon2.png'], 
   },
+  verification: {
+    google:'oGOd7ksM6kVit6xiJHKRiXKj8lPv3AtozK1_F2bqLxA',
+  },
 };
 
 export default function RootLayout({ children }) {
+  // JSON-LD ডাটা
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Amran Hossen",
+    "url": "https://amran-portfolio.vercel.app/",
+    "jobTitle": "Full-Stack Web Developer",
+    "sameAs": [
+      "https://github.com/amranwebdev1", // আপনার সঠিক লিঙ্ক দিন
+      "https://www.linkedin.com/in/md-amran-hossen-a93a672a3?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      
+    ],
+    "description": "Specializing in Next.js, Tailwind CSS, and Supabase."
+  };
+
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${lobster.variable} antialiased`}
-      >
-      <ThemeProvider
-      attribute="class"
-      defaultTheme="dark"
-      enableSystem
-      disableTransitionOnChange
-        >
-        <Layout>
-          {children}
-        </Layout>
-      </ThemeProvider>
+      <head>
+        {/* গুগলকে আপনার সম্পর্কে স্পষ্ট ধারণা দেওয়ার জন্য */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${lobster.variable} antialiased`}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+          <Layout>{children}</Layout>
+        </ThemeProvider>
       </body>
     </html>
   );
 }
+
