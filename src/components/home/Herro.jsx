@@ -11,9 +11,10 @@ const Herro = ({herroData}) => {
         {/*herro left*/} 
         <div className="text-center">
           <h1 
-          className="text-3xl font-bold font-lobster">Hi,I'm <br/> <span className="text-4xl bg-gradient-to-r from-[#1f87de] to-[#31d1e7] text-transparent bg-clip-text">{herroData?.name}</span></h1>
+          className="text-3xl md:text-4xl font-bold font-lobster">Hi,I'm <br/> <span className="text-4xl bg-gradient-to-r from-[#1f87de] to-[#31d1e7] text-transparent bg-clip-text">{herroData?.name}</span></h1>
           
-          <p className="text-xl">{herroData?.title}</p>
+          <p className="text-xl md:mt-4 md:text-2xl">{herroData?.title}</p>
+          <p className="text-md mt-4 md:mt-6 md:px-15">{herroData?.short_bio}</p>
           {/*social link*/} 
           <div className="mt-6 flex items-center justify-center mb-2">
             <SocialLink />

@@ -1,7 +1,6 @@
 import { Geist, Geist_Mono,Roboto,Lobster } from "next/font/google";
 import "./globals.css";
 import {ThemeProvider} from "@/components/ui/theme-provider"
-import Layout from "@/components/common/Layout"
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -96,7 +95,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${lobster.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          <Layout>{children}</Layout>
+          {children}
         </ThemeProvider>
       </body>
     </html>

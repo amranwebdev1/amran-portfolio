@@ -1,9 +1,8 @@
 "use client"
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import Container from "@/components/common/Container";
 import { skills } from "@/constents/data";
-import { useSelector, useDispatch } from "react-redux";
-import { filterSkill, setAll } from "@/redux/features/filter/filterSlice";
+
 import { Card } from "@/components/ui/card";
 import {WhileInViewDiv} from "@/components/common/Motion"
 import { Layout, Zap, Terminal, Database, Code2, Layers } from "lucide-react";
@@ -22,14 +21,12 @@ const iconColors = {
 };
 
 const Skill = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setAll(skills));
-  }, [dispatch]);
-
-  const skill = useSelector((state) => state?.skill?.skill);
-
+const [skill,setSkill] = useState(skills)
+  
+  const handleSkill = async(category)=>{
+    const data = await skills.filter((item)=> item.category === category);
+    setSkill(data)
+  }
   return (
     <section className="py-20">
       <Container>
@@ -39,23 +36,19 @@ const Skill = () => {
         {/* Filter Buttons */}
         <div className="flex justify-center gap-3 mb-12 flex-wrap">
           <button
-            onClick={() => dispatch(setAll(skills))}
+            onClick={() => setSkill(skills)}
             className="px-4 py-1 rounded-md text-sm bg-black/10 dark:bg-white/10 backdrop-blur border border-black/10 dark:border-white/10 hover:scale-105 transition"
           >
             All
           </button>
           <button
-            onClick={() =>
-              dispatch(filterSkill({ skills, category: "Frontend" }))
-            }
+            onClick={() => handleSkill("Frontend")}
             className="px-4 py-1 rounded-md text-sm bg-black/10 dark:bg-white/10 backdrop-blur border border-black/10 dark:border-white/10 hover:scale-105 transition"
           >
             Frontend
           </button>
           <button
-            onClick={() =>
-              dispatch(filterSkill({ skills, category: "Backend" }))
-            }
+            onClick={() => handleSkill("Backend")}
             className="px-4 py-1 rounded-md text-sm bg-black/10 dark:bg-white/10 backdrop-blur border border-black/10 dark:border-white/10 hover:scale-105 transition"
           >
             Backend

@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import Title from "@/components/common/Title";
 import {WhileInViewDiv} from "@/components/common/Motion";
 import {WhileInViewText} from "@/components/common/Motion";
-const About = ({about}) => {
-  
+const About = ({aboutData}) => {
+  const {about,image} = aboutData;
   return (
     <section className="py-20">
       <Container>
@@ -44,7 +44,7 @@ const About = ({about}) => {
           >
             <div className="relative w-80 h-80 rounded-full overflow-hidden border-4 border-[#1f87de]/30 dark:border-[#31d1e7]/50 shadow-2xl hover:scale-105 transition-transform duration-500">
               <Image
-                src="/icon1.png"
+                src={image}
                 alt="About Me"
                 fill
                 className="object-cover"
