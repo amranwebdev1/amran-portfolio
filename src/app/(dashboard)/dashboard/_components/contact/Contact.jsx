@@ -8,6 +8,7 @@ import {
   Loader2
 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast"
 const ContactForm = () => {
   const router = useRouter();
   const [loading,setLoading] = useState(false)
@@ -47,11 +48,11 @@ const ContactForm = () => {
       if(error) throw error;
       await fetch('/api/revalidate?path=/');
       router.refresh()
-      alert("Contact update successfully!")
-      
+      toast.success("Contact update successfully!")
+      router.push("/dashboard")
     }catch(error){
       console.log(error.message)
-      alert("Update failed!")
+      toast.error("Update failed!")
     }finally{
       setLoading(false)
     }

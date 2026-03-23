@@ -4,6 +4,7 @@ import Container from "@/components/common/Container";
 import { User, ImagePlus, Loader2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast"
 const About = () => {
   const router = useRouter();
   const [bio, setBio] = useState("");
@@ -62,7 +63,7 @@ const About = () => {
       setPreview(newUrl);
     } catch (error) {
       console.log(error.message);
-      alert("Error uploading image!");
+      toast.error("Error uploading image!");
     } finally {
       setUploading(false);
     }
@@ -71,7 +72,7 @@ const About = () => {
   // ৩. ফাইনাল সাবমিট (Update)
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (uploading) return alert("Please wait for image to upload!");
+    if (uploading) return toast.success("Please wait for image to upload!");
     
     setLoading(true);
     try {
@@ -84,10 +85,11 @@ const About = () => {
       if (error) throw error;
       await fetch('/api/revalidate?path=/'); 
       router.refresh()
-      alert("Updated successfully!");
+      toast.success("Updated successfully!");
+      router.push("/dashboard")
     } catch (error) {
       console.log(error.message);
-      alert("Update failed!");
+      toast.error("Update failed!");
     } finally {
       setLoading(false);
     }

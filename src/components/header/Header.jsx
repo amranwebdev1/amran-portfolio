@@ -12,7 +12,7 @@ const Header = () => {
     <div className="py-2 bg-white/40 dark:bg-black/40 backdrop-blur-md border-b dark:border-b-white/20 border-b-black/20 fixed top-0 left-0 right-0 z-50 font-roboto" >
       <Container className="flex items-center justify-between" >
         {/*logo*/}
-        <Link href="/dashboard">
+        <Link href="/">
           <Logo />
         </Link>
         {/*navlink*/}

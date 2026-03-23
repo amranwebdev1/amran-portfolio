@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Folder, FileText, Link, Github, Code, Plus, X, Image as ImageIcon, Loader2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
-
+import toast from "react-hot-toast"
 const ProjectForm = () => {
   const router = useRouter();
   const [techs, setTechs] = useState([]);
@@ -73,10 +73,12 @@ const ProjectForm = () => {
       ]);
 
       if (error) throw error;
+      //insert history
+      await supabase.from('activities').insert([{type:"ADD",task: `নতুন প্রজেক্ট যোগ করা হয়েছে: ${formData.name}`}])
       await fetch('/api/revalidate?path=/');
       router.push("/dashboard/project"); 
       router.refresh()
-      alert("Project added successfully!");
+      toast.success("Project added successfully!");
       
       // ফর্ম রিসেট
       setFormData({ name: "", description: "", link: "", github_link: "", icon: "" });
@@ -84,7 +86,7 @@ const ProjectForm = () => {
       setImageFile(null);
     } catch (error) {
       console.error("Error:", error.message);
-      alert("Something went wrong!");
+      toast.error("Something went wrong!");
     } finally {
       setUploading(false);
     }

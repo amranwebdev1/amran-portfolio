@@ -1,6 +1,9 @@
 import { Geist, Geist_Mono,Roboto,Lobster } from "next/font/google";
 import "./globals.css";
 import {ThemeProvider} from "@/components/ui/theme-provider"
+import Layout from "@/components/common/Layout"
+import { Toaster } from 'react-hot-toast';
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -24,65 +27,86 @@ const lobster = Lobster({
 
 
 export const metadata = {
-  title:{
+  metadataBase: new URL('https://amran-portfolio.vercel.app/'), // Canonical URL এর জন্য এটি প্রয়োজন
+  title: {
     default: 'Amran Hossen | Full-Stack Web Developer',
     template: '%s | Amran Hossen',
   },
-  description: 'Specializing in Next.js, Tailwind CSS, and Supabase. Building premium, high-performance web applications.',
+  description: '6+ years of experience in building premium, high-performance web applications using Next.js, Tailwind CSS, and Supabase.',
   keywords: [
-  "Md Amran",
-  "Amran Hossen",
-  "Full Stack Developer Bangladesh",
-  "Next.js Developer",
-  "React Developer",
-  "Web Developer Portfolio",
-  "Frontend Developer Bangladesh",
-  "Tailwind CSS Developer",
-  "JavaScript Developer"
+    "Amran Hossen", "Next.js Developer Bangladesh", "React Specialist", 
+    "Full Stack Web Developer", "Supabase Expert", "UI/UX Designer", 
+    "Shadcn UI Portfolio", "Modern Web Templates"
   ],
-  authors:[{name:"Amran Hossen"}],
+  authors: [{ name: "Amran Hossen", url: "https://amran-portfolio.vercel.app/" }],
+  creator: "Amran Hossen",
+  publisher: "Amran Hossen",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
     title: 'Amran Hossen | Full-Stack Developer',
-    description: 'Explore my projects and skills in modern web development.',
-    url: 'https://amran-portfolio.vercel.app/', // আপনার ডোমেইন
-    siteName: 'amran-portfolo',
+    description: 'Specializing in high-performance React & Next.js applications.',
+    url: '/',
+    siteName: 'Amran Hossen Portfolio',
     images: [
       {
-        url: '/icon2.png', // একটি সুন্দর ইমেজ যা ফেসবুকে শেয়ার করলে দেখাবে
+        url: '/og-image.png', // আপনার প্রোফাইলের একটি প্রফেশনাল ব্যানার দিতে পারেন
         width: 1200,
         height: 630,
+        alt: 'Amran Hossen Portfolio Banner',
       },
     ],
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
-    card: 'summary_large_image', // বড় ইমেজ দেখানোর জন্য
+    card: 'summary_large_image',
     title: 'Amran Hossen | Full-Stack Developer',
     description: 'Building modern web experiences with Next.js & Supabase.',
-    creator: '@your_twitter_handle', // আপনার টুইটার ইউজারনেম
-    images: ['/icon2.png'], 
+    images: ['/og-image.png'], 
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   verification: {
-    google:'oGOd7ksM6kVit6xiJHKRiXKj8lPv3AtozK1_F2bqLxA',
+    google: 'oGOd7ksM6kVit6xiJHKRiXKj8lPv3AtozK1_F2bqLxA',
   },
 };
+
 
 export default function RootLayout({ children }) {
   // JSON-LD ডাটা
   const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Amran Hossen",
-    "url": "https://amran-portfolio.vercel.app/",
-    "jobTitle": "Full-Stack Web Developer",
-    "sameAs": [
-      "https://github.com/amranwebdev1", // আপনার সঠিক লিঙ্ক দিন
-      "https://www.linkedin.com/in/md-amran-hossen-a93a672a3?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-      
-    ],
-    "description": "Specializing in Next.js, Tailwind CSS, and Supabase."
-  };
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Amran Hossen",
+  "alternateName": "Md Amran Hossen",
+  "url": "https://amran-portfolio.vercel.app/",
+  "image": "https://amran-portfolio.vercel.app/icon2.jpg", // আপনার ছবি
+  "jobTitle": "Full-Stack Web Developer",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "Bangladesh"
+  },
+  "sameAs": [
+    "https://github.com/amranwebdev1",
+    "https://www.linkedin.com/in/md-amran-hossen-a93a672a3",
+    "https://www.facebook.com/share/1bk7nHTFZ9/" // যদি থাকে
+  ],
+  "knowsAbout": ["React", "Next.js", "Tailwind CSS", "Supabase", "TypeScript", "Node.js,html,css,sql,mongodb"]
+};
+
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -95,7 +119,10 @@ export default function RootLayout({ children }) {
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${lobster.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          {children}
+          <Layout>
+            {children}
+            <Toaster />
+          </Layout>
         </ThemeProvider>
       </body>
     </html>

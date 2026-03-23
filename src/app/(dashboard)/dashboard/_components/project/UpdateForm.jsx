@@ -71,10 +71,18 @@ const UpdateForm = ({ projectId }) => {
       // শুরুতে ডিফল্টভাবে স্টেট-এ থাকা ইমেজ URL টি রাখা হলো
       let finalImageUrl = formData.image; 
 
+    
       // ২. যদি নতুন ইমেজ ফাইল সিলেক্ট করা হয় তবেই সেটি আপলোড হবে
       if (imageFile) {
+    //if selectrd new image then remove old image from storage
+      try{
+        const oldImage = formData?.image?.split("/").pop()
+        await supabase.from("project-images").remove([oldImage])
+      }catch(error){
+        console.log(error.message)
+      }
         const fileExt = imageFile.name.split(".").pop();
-        const fileName = `${Date.now()}.${fileExt}`;
+        const fileName = `project-image-${Date.now()}.${fileExt}`;
         
         const { error: uploadError } = await supabase.storage
           .from("project-images")
@@ -103,7 +111,8 @@ const UpdateForm = ({ projectId }) => {
         .eq("id", projectId);
 
       if (error) throw error;
-
+      //insert history
+      await supabase.from("activities").insert([{type:"UPDATE",task:`প্রজেক্ট আপডেট করা হয়েছে: ${updateData.name}`}])
       // রিভ্যালিডেশন এবং পেজ রিফ্রেশ
       await fetch('/api/revalidate?path=/');
       router.refresh();

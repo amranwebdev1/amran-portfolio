@@ -7,15 +7,20 @@ import {useRouter} from "next/navigation"
 const Cart = ({projects}) => {
   const supabase =  createClient()
   const router = useRouter()
-  const handleDelete = async (id)=>{
+  const handleDelete = async (id,projectName)=>{
     const isConfirmed = confirm("আপনি কি নিশ্চিত যে এটি ডিলিট করতে চান?");
     if (!isConfirmed) return;
-
+    
     const {error} = await supabase.from("projects").delete().eq("id",id);
     if(error) return alert("Not be delete")
     await fetch('/api/revalidate?path=/')
     router.refresh()
     alert("delete successfully")
+    //inser history
+    await supabase.from('activities').insert([{
+      type: "DELETE",
+      task: `প্রজেক্ট রিমুভ করা হয়েছে: ${projectName}`
+    }]);
   }
   return (
     <div className="flex flex-col items-center justify-center gap-3 mt-4">
@@ -37,7 +42,7 @@ const Cart = ({projects}) => {
               className="p-2.5 bg-slate-800 text-slate-400 hover:text-white rounded-xl border border-slate-700 transition-colors"><Edit3 size={18} /></button>
                   
                     <button
-                    onClick={()=> handleDelete(item?.id)}
+                    onClick={()=> handleDelete(item?.id,item?.name)}
                     className="p-2.5 bg-slate-800 text-slate-400 hover:text-rose-500 rounded-xl border border-slate-700 transition-colors"><Trash2 size={18} /></button>
             </div>
           </div>

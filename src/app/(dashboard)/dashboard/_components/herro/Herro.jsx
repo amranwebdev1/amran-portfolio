@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { User, BadgeCheck, FileText, Facebook, Youtube, Linkedin, Github, Twitter, Loader2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast"
 const Herro = () => {
   const router = useRouter();
   const supabase = createClient();
@@ -63,10 +64,11 @@ const Herro = () => {
 
       // বর্তমান ড্যাশবোর্ডের ডেটা আপডেট করা
       router.refresh()
-      alert("Profile updated successfully!");
+      toast.success("Profile updated successfully!");
+      router.push("/dashboard")
     } catch (error) {
       console.error("Error Detail:", error.message || error);
-      alert("Update failed!");
+      toast.error("Update failed!");
     } finally {
       setLoading(false);
     }
