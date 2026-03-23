@@ -114,11 +114,10 @@ const About = () => {
               value={bio}
               onChange={(e) => setBio(e.target.value)}
               rows="5"
-              maxLength="200"
               placeholder="Write something about yourself..."
               className="w-full bg-transparent border border-gray-700 rounded-lg p-3 text-white placeholder-gray-400 outline-none focus:border-blue-500 transition"
             />
-            <span className="text-xs text-gray-400 text-right">{bio.length}/200</span>
+            <span className="text-xs text-gray-400 text-right">{bio.length}</span>
           </div>
 
           <div className="flex flex-col gap-3">
