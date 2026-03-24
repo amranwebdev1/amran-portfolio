@@ -1,16 +1,25 @@
 "use client"
-import React, { useEffect,useState } from "react";
+import React, { useState } from "react";
 import Container from "@/components/common/Container";
 import { skills } from "@/constents/data";
 
 import { Card } from "@/components/ui/card";
-import {WhileInViewDiv} from "@/components/common/Motion"
-import { Layout, Zap, Terminal, Database, Code2, Layers } from "lucide-react";
+import { WhileInViewDiv } from "@/components/common/Motion";
+import {
+  Layout, Zap, Terminal, Database, Code2, Layers,
+  FileCode, FileCode2, Code, DatabaseBackup, Cloud,
+  Shuffle, Share2, GitBranch, Github, Triangle, Globe
+} from "lucide-react";
 import Title from "@/components/common/Title";
 
-const iconMap = { Layout, Zap, Terminal, Database, Code2, Layers };
+// Icon Map
+const iconMap = {
+  Layout, Zap, Terminal, Database, Code2, Layers,
+  FileCode, FileCode2, Code, DatabaseBackup, Cloud,
+  Shuffle, Share2, GitBranch, Github, Triangle, Globe
+};
 
-// Icon colors
+// Icon Colors
 const iconColors = {
   Layout: "#f97316",
   Zap: "#22c55e",
@@ -18,45 +27,76 @@ const iconColors = {
   Database: "#a855f7",
   Code2: "#ef4444",
   Layers: "#facc15",
+  FileCode: "#eab308",
+  FileCode2: "#f59e0b",
+  Code: "#6366f1",
+  DatabaseBackup: "#3b82f6",
+  Cloud: "#22c55e",
+  Shuffle: "#a855f7",
+  Share2: "#f97316",
+  GitBranch: "#f97316",
+  Github: "#ffffff",
+  Triangle: "#ffffff",
+  Globe: "#14b8a6"
 };
 
+// Categories
+const categories = [
+  "All",
+  "Frontend",
+  "Backend",
+  "Database",
+  "Languages",
+  "Design",
+  "Tools",
+  "Deployment"
+];
+
 const Skill = () => {
-const [skill,setSkill] = useState(skills)
-  
-  const handleSkill = async(category)=>{
-    const data = await skills.filter((item)=> item.category === category);
-    setSkill(data)
-  }
+  const [skill, setSkill] = useState(skills);
+  const [active, setActive] = useState("All");
+
+  const handleSkill = (category) => {
+    const data = skills.filter((item) => item.category === category);
+    setSkill(data);
+  };
+
+  const handleFilter = (cat) => {
+    setActive(cat);
+    if (cat === "All") {
+      setSkill(skills);
+    } else {
+      handleSkill(cat);
+    }
+  };
+
   return (
     <section className="py-20">
       <Container>
+
         {/* Heading */}
         <Title>My Skills</Title>
 
         {/* Filter Buttons */}
         <div className="flex justify-center gap-3 mb-12 flex-wrap">
-          <button
-            onClick={() => setSkill(skills)}
-            className="px-4 py-1 rounded-md text-sm bg-black/10 dark:bg-white/10 backdrop-blur border border-black/10 dark:border-white/10 hover:scale-105 transition"
-          >
-            All
-          </button>
-          <button
-            onClick={() => handleSkill("Frontend")}
-            className="px-4 py-1 rounded-md text-sm bg-black/10 dark:bg-white/10 backdrop-blur border border-black/10 dark:border-white/10 hover:scale-105 transition"
-          >
-            Frontend
-          </button>
-          <button
-            onClick={() => handleSkill("Backend")}
-            className="px-4 py-1 rounded-md text-sm bg-black/10 dark:bg-white/10 backdrop-blur border border-black/10 dark:border-white/10 hover:scale-105 transition"
-          >
-            Backend
-          </button>
+          {categories.map((cat, i) => (
+            <button
+              key={i}
+              onClick={() => handleFilter(cat)}
+              className={`px-4 py-1 rounded-md text-sm border transition-all duration-300
+                ${
+                  active === cat
+                    ? "bg-gradient-to-tr from-[#1f87de] to-[#31d1e7] text-white scale-105 shadow-md"
+                    : "bg-black/10 dark:bg-white/10 border-black/10 dark:border-white/10 hover:scale-105"
+                }`}
+            >
+              {cat}
+            </button>
+          ))}
         </div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
           {skill?.map((item, i) => {
             const Icon = iconMap[item.icon];
             const iconColor = iconColors[item.icon] || "#ffffff";
@@ -67,16 +107,18 @@ const [skill,setSkill] = useState(skills)
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
-                transition={{ delay: i * 0.1, type: "spring", stiffness: 130 }}
+                transition={{ delay: i * 0.05, type: "spring", stiffness: 130 }}
               >
                 <Card className="flex flex-col items-center justify-center gap-3 p-6 rounded-2xl border border-black/10 dark:border-white/10 bg-gradient-to-tr from-[#1f87de]/10 to-[#31d1e7]/5 dark:from-[#1f87de]/10 dark:to-[#31d1e7]/10 backdrop-blur-xl hover:scale-105 hover:shadow-lg transition duration-300">
-                  
+
                   {/* Icon */}
                   <div
                     className="w-14 h-14 flex items-center justify-center rounded-lg relative"
                     style={{ backgroundColor: `${iconColor}20` }}
                   >
-                    {Icon && <Icon className="w-7 h-7" style={{ color: iconColor }} />}
+                    {Icon && (
+                      <Icon className="w-7 h-7" style={{ color: iconColor }} />
+                    )}
                     <span className="absolute w-full h-full rounded-lg bg-gradient-to-r from-[#1f87de] to-[#31d1e7] opacity-20 blur-lg -z-10" />
                   </div>
 
@@ -84,11 +126,13 @@ const [skill,setSkill] = useState(skills)
                   <h2 className="text-sm md:text-base font-medium text-center text-gray-900 dark:text-gray-100">
                     {item?.name}
                   </h2>
+
                 </Card>
               </WhileInViewDiv>
             );
           })}
         </div>
+
       </Container>
     </section>
   );
