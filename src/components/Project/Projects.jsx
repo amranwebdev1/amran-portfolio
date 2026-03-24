@@ -53,7 +53,7 @@ const ProjectsSection = ({projects}) => {
                     src={project?.image}
                     alt={project?.name}
                     fill
-                    className="object-cover"
+                    className="w-full h-auto object-center"
                   />
                 </motion.div>
                 <div className="absolute top-4 left-4 z-20 bg-white/20 dark:bg-black/40 backdrop-blur-md p-2 rounded-xl border border-white/10">
@@ -85,7 +85,7 @@ const ProjectsSection = ({projects}) => {
                     href={project?.link}
                     className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#1f87de] to-[#31d1e7] rounded-lg text-sm font-semibold text-white shadow-md transition-transform duration-200 active:scale-95"
                   >
-                    লাইভ ডেমো <ExternalLink size={16} />
+                    Live preview <ExternalLink size={16} />
                   </Link>
                   )}
                   

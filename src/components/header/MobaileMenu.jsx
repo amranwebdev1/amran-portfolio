@@ -68,7 +68,8 @@ const MobaileMenu = () => {
     
     <DrawerFooter className=" mb-8 font-roboto" >
         <Link 
-      href="/" 
+      href="/amran_resume.pdf"
+      download
       className="flex items-center justify-center gap-2 rounded-lg py-2 px2 bg-black/10 border border-black/20 dark:bg-white/10 dark:border dark:border-white/20 backdrop-blur-2xl text-md font-semibold">
           <ArrowDownToLine size={20} />
       Download resume

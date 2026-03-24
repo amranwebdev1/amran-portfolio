@@ -28,7 +28,8 @@ const Herro = ({herroData}) => {
               <ArrowRight className="animate-ping" />
             </Link>
     
-            <Link href="/"
+            <Link href="/amran_resume.pdf"
+            download
             className="flex items-center justify-center rounded-full py-2 px-4 text-sm md:text-xl gap-2  font-semibold bg-gradient-to-tr from-[#1f87de]/10 to-[#31d1e7]/20 border border-[#31d1e7]/10 backdrop-blur-2xl"
             >
               <ArrowDownToLine />
