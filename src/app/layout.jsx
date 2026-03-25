@@ -49,11 +49,11 @@ export const metadata = {
   openGraph: {
     title: 'Amran Hossen | Full-Stack Developer',
     description: 'Specializing in high-performance React & Next.js applications.',
-    url: '/',
-    siteName: 'Amran Hossen Portfolio',
+    url: 'https://amran-portfolio.vercel.app/',
+    siteName: 'Amran Hossen',
     images: [
       {
-        url: '/og-image.png', // আপনার প্রোফাইলের একটি প্রফেশনাল ব্যানার দিতে পারেন
+        url: '/icon2.png', // আপনার প্রোফাইলের একটি প্রফেশনাল ব্যানার দিতে পারেন
         width: 1200,
         height: 630,
         alt: 'Amran Hossen Portfolio Banner',
@@ -66,7 +66,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Amran Hossen | Full-Stack Developer',
     description: 'Building modern web experiences with Next.js & Supabase.',
-    images: ['/og-image.png'], 
+    images: ['/icon2.png'], 
   },
   robots: {
     index: true,
