@@ -63,7 +63,7 @@ const ProjectsSection = ({projects}) => {
               </div>)}
 
               {/* Content */}
-              <div className="p-6 flex flex-col flex-grow relative z-20">
+              <div className="py-4 px-2 flex flex-col flex-grow relative z-20">
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project?.tech.map((tag, i) => (
                     <span key={i} className="text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded-md bg-[#1f87de]/10 text-[#1f87de] dark:bg-black/20 dark:text-gray-300 border border-white/10">

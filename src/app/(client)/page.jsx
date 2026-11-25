@@ -12,7 +12,7 @@ export const dynamic = "force-static";
 const HomePage = async ()=> {
   const supabase = await createClient();
  //get project data
-   const {data:projects} = await supabase.from("projects").select("*").order(created_at,(ascending:false));
+   const {data:projects} = await supabase.from("projects").select("*").order("created_at",{ascending:false});
    
   //get info data
   const {data} = await supabase.from("info").select("name,title,short_bio,phone,email,location").single();

@@ -12,7 +12,7 @@ export const metadata = {
 const ProjectPage = async () => {
   const supabase = await createClient();
  
-   const {data:projects} = await supabase.from("projects").select("*");
+   const {data:projects} = await supabase.from("projects").select("*").order("created_at",{ascending:false});
   return (
     <div>
       <Project projects={projects} />
