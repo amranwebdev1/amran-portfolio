@@ -1,6 +1,6 @@
 import ContactInfo from "./ContactInfo";
 import ContactForm from "./ContactForm";
-import {WhileInViewText} from "@/components/common/Motion";
+import Title from "@/components/common/Title";
 const Contact = ({contact}) => {
   return (
     <section className="py-24 relative">
@@ -13,14 +13,14 @@ const Contact = ({contact}) => {
       <div className="max-w-6xl mx-auto px-4">
 
         {/* Title */}
-        <WhileInViewText
+        <Title
           initial={{opacity:0,y:30}}
           whileInView={{opacity:1,y:0}}
           transition={{duration:0.6}}
           className="text-center text-4xl md:text-5xl font-bold mb-16 text-gray-900 dark:text-gray-100"
         >
           Contact Me
-        </WhileInViewText>
+        </Title>
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
 

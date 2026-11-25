@@ -1,8 +1,16 @@
 import { Geist, Geist_Mono,Roboto,Lobster } from "next/font/google";
+import localFont from 'next/font/local'
 import "./globals.css";
 import {ThemeProvider} from "@/components/ui/theme-provider"
 import Layout from "@/components/common/Layout"
 import { Toaster } from 'react-hot-toast';
+
+const myCustomFont = localFont({
+  src: '../fonts/gafiya-regular.otf', // আপনার ফন্ট ফাইলের নাম এখানে দিন (যেমন: myfont.woff2)
+  variable: '--font-gafiya', // এটি একটি CSS ভ্যারিয়েবল তৈরি করবে
+})
+
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +46,7 @@ export const metadata = {
     "Full Stack Web Developer", "Supabase Expert", "UI/UX Designer", 
     "Shadcn UI Portfolio", "Modern Web Templates"
   ],
+  applicationName: 'Amran Hossen',
   authors: [{ name: "Amran Hossen", url: "https://amran-portfolio.vercel.app/" }],
   creator: "Amran Hossen",
   publisher: "Amran Hossen",
@@ -117,7 +126,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${lobster.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} ${lobster.variable} ${myCustomFont.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <Layout>
             {children}
